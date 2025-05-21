@@ -8,6 +8,7 @@ import (
 	"image/gif"
 	"log"
 	"os"
+	"time"
 
 	"github.com/disintegration/gift"
 )
@@ -19,6 +20,8 @@ func main() {
 	cropWidth := flag.Int("width", 100, "Width of the cropped region")
 	cropHeight := flag.Int("height", 100, "Height of the cropped region")
 	outputFile := flag.String("output", "cropped.gif", "Output file name")
+	startTime := time.Now()
+	fmt.Printf("Starting processing at: %v\n", startTime.Format(time.RFC3339))
 
 	flag.Parse()
 
@@ -32,6 +35,8 @@ func main() {
 		log.Fatalf("Error processing GIF: %v", err)
 	}
 
+	elapsed := time.Since(startTime)
+	fmt.Printf("Processing completed in: %v\n", elapsed)
 	fmt.Println("GIF processed and saved to", *outputFile)
 }
 
